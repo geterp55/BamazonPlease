@@ -26,6 +26,7 @@ connection.query('SELECT * FROM products', function(err, showDatabase) {
 	// console.log(showDatabase);
 	
 	//This works shows whole database in a table format
+	//
 	console.log(table.print(showDatabase));
 
 	productSelect();
