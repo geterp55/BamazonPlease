@@ -36,6 +36,7 @@ connection.query('SELECT * FROM products', function(err, showDatabase) {
 })
 // connection.end();
  // clear.table();
+ //
 //---------------------------------------------------------
 //prompt: "What would you like to purchase?"
 var productSelect = function() {
