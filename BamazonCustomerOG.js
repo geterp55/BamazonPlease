@@ -24,16 +24,13 @@ connection.query('SELECT * FROM products', function(err, showDatabase) {
 	if (err) throw err;
 	//This works as a test prints out table in JSON format
 	// console.log(showDatabase);
-
-
 	
 	//This works shows whole database in a table format
 	//
 	console.log(table.print(showDatabase));
 
 	productSelect();
-	
-	
+		
 
 
 })
@@ -53,30 +50,18 @@ var productSelect = function() {
 		message: 'How many would you like to buy?'
 	},{
 		name: 'confirm',
-		type: 'confirm',
-		message: 'Continue with another product? Y or N',
-		choices: ["Y","N"]
+		type: 'input',
+		message: 'Confirm your choices Y or N?'
+	
+
 	}]).then(function(order) {
-        connection.query('SELECT FROM Products WHERE ?', [{
-        	itemID: order.input,
-        	StockQuantity: order.input,
+        var query = 'SELECT FROM Products WHERE ?'
+        connection.query(query, {itemID: order.input}, function(err, res) {
 
-        }], function(err, res) {
 
+            // for (var i = 0; i < res.length; i++) {
                 var basket = (JSON.stringify(order,null, 2));
-                if(order.confrim == "Y"){
-                	productSelect();
-                } else {
-	                var cart = function(stack){
-						for (var i = 0; i < stack.length;i++){
-							var sum = basket;	
-						}	 
-					}
-
-                console.log(basket);   	
-                }
-                
-
+                console.log(basket);    
 
         
          //                	var anotherSelection = function(){
@@ -92,19 +77,20 @@ var productSelect = function() {
         	// 					});
         	// 				}
         					anotherSelection();
+        		
 
-        		 
+
+
+        		var cart = function(stack){
+					for (var i = 0; i < stack.length;i++){
+						var sum = basket;	
+					}	 
+				} 
         });
 	});
 }
 
-// var productDecrament = function() {
-// 	connection.query('SELECT * FROM products', function(err, res) {
-//     if (err) throw err;
-//     console.log(res);
 
-
-// }
 
 
 
